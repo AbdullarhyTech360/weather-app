@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <link rel="icon" type="image/png" sizes="32x32" href="./assets/images/favicon-32x32.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@700&family=DM+Sans:wght@300;500;600;700&display=swap"
+    rel="stylesheet">
+  <link href="./dist/css/output.css" rel="stylesheet">
+
+  <title>Frontend Mentor | Weather app</title>
+</head>
+
+<body class="font-sans text-neutral-0 bg-neutral-900 min-h-screen">
+  <div class="max-w-7xl mx-auto px-5 py-5 md:px-10 md:py-8 relative min-h-screen">
+
+    <!-- Header -->
+    <header class="relative flex items-center justify-between mb-8">
+      <div class="w-[120px] md:w-[140px]">
+        <img src="./assets/images/logo.svg" alt="Weather App" class="w-full">
+      </div>
+
+      <!-- Units Toggle -->
+      <div class="relative">
+        <button id="units-toggle" aria-haspopup="dialog" aria-expanded="false"
+          class="focus-ring-blue flex items-center gap-1.5 bg-neutral-700 hover:bg-neutral-600 px-3 py-2 rounded-lg transition-all text-sm border border-neutral-600/30">
+          <img src="./assets/images/icon-units.svg" alt="" class="w-3.5 h-3.5">
+          <span class="text-sm">Units</span>
+          <img src="./assets/images/icon-dropdown.svg" alt="" class="w-3 h-3 transition-transform duration-200" id="units-chevron">
+        </button>
+
+        <div id="units-dropdown"
+          class="absolute right-0 mt-2 w-[190px] bg-neutral-800 rounded-lg shadow-lg border border-neutral-600/30 hidden z-20 py-1"
+          role="dialog" aria-label="Units selection">
+          <div class="px-2 py-1.5 border-b border-neutral-600/30">
+            <button id="switch-units-btn" type="button"
+              class="w-full text-center px-3 py-2 border border-neutral-400 rounded-lg text-sm hover:bg-neutral-700 focus:outline-2 focus:outline-white focus:outline-offset-1 transition-colors">
+              <span id="switch-message">Switch to imperial</span>
+            </button>
+          </div>
+          <div class="border-b border-neutral-600/30 px-2 py-1.5">
+            <p class="text-[11px] text-neutral-300 mb-1.5">Temperature</p>
+            <div class="space-y-1">
+              <button type="button"
+                class="unit-option w-full flex items-center justify-between px-2 py-1.5 rounded-lg text-sm bg-neutral-700"
+                data-type="temperature" data-value="metric">
+                <span>Celsius (°C)</span>
+                <img src="./assets/images/icon-checkmark.svg" class="w-3 h-3 opacity-100 transition-opacity">
+              </button>
+              <button type="button"
+                class="unit-option w-full flex items-center justify-between px-2 py-1.5 rounded-lg text-sm hover:bg-neutral-700"
+                data-type="temperature" data-value="imperial">
+                <span>Fahrenheit (°F)</span>
+                <img src="./assets/images/icon-checkmark.svg" class="w-3 h-3 opacity-0 transition-opacity">
+              </button>
+            </div>
+          </div>
+
+          <div class="border-b border-neutral-600/30 px-2 py-1.5">
+            <p class="text-[11px] text-neutral-300 mb-1.5">Wind Speed</p>
+            <div class="space-y-1">
+              <button type="button"
+                class="unit-option w-full flex items-center justify-between px-2 py-1.5 rounded-lg text-sm bg-neutral-700"
+                data-type="wind" data-value="metric">
+                <span>km/h</span>
+                <img src="./assets/images/icon-checkmark.svg" class="w-3 h-3 opacity-100 transition-opacity">
+              </button>
+              <button type="button"
+                class="unit-option w-full flex items-center justify-between px-2 py-1.5 rounded-lg text-sm hover:bg-neutral-700"
+                data-type="wind" data-value="imperial">
+                <span>mph</span>
+                <img src="./assets/images/icon-checkmark.svg" class="w-3 h-3 opacity-0 transition-opacity">
+              </button>
+            </div>
+          </div>
+
+          <div class="px-2 py-1.5">
+            <p class="text-[11px] text-neutral-300 mb-1.5">Precipitation</p>
+            <div class="space-y-1">
+              <button type="button"
+                class="unit-option w-full flex items-center justify-between px-2 py-1.5 rounded-lg text-sm bg-neutral-700"
+                data-type="precipitation" data-value="metric">
+                <span>Millimeters (mm)</span>
+                <img src="./assets/images/icon-checkmark.svg" class="w-3 h-3 opacity-100 transition-opacity">
+              </button>
+              <button type="button"
+                class="unit-option w-full flex items-center justify-between px-2 py-1.5 rounded-lg text-sm hover:bg-neutral-700"
+                data-type="precipitation" data-value="imperial">
+                <span>inches (in)</span>
+                <img src="./assets/images/icon-checkmark.svg" class="w-3 h-3 opacity-0 transition-opacity">
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <!-- Error State -->
+    <div id="error-state" class="hidden fixed inset-0 z-50 bg-neutral-900 flex items-center justify-center"
+      role="alert" aria-live="assertive">
+      <div class="flex flex-col items-center text-center max-w-sm px-6">
+        <div class="w-16 h-16 rounded-full bg-orange-500/15 flex items-center justify-center mb-6">
+          <img src="./assets/images/icon-error.svg" alt="" class="w-8 h-8">
+        </div>
+        <h2 class="font-display text-2xl font-bold mb-2">Something went wrong</h2>
+        <p class="text-neutral-300 text-sm mb-8">We couldn't fetch the weather data. Please try again.</p>
+        <button id="retry-button"
+          class="focus-button flex items-center justify-center gap-2 bg-blue-500 hover:bg-blue-700 text-white px-6 py-3 rounded-lg transition-colors font-semibold text-sm">
+          <img src="./assets/images/icon-retry.svg" alt="" class="w-4 h-4"> Retry
+        </button>
+      </div>
+    </div>
+
+    <h1 class="font-display text-[2rem] md:text-5xl lg:text-6xl font-bold text-center mx-auto mb-6 md:mb-8 leading-tight">
+      How's the sky looking today?
+    </h1>
+
+    <!-- Search Section -->
+    <section class="max-w-[450px] mx-auto mb-6 md:mb-8">
+      <div class="flex flex-col sm:flex-row gap-3">
+        <label for="search-input"
+          class="search-label relative flex-1 flex items-center gap-2 bg-neutral-800 px-3 py-2.5 rounded-lg border border-neutral-700/30 cursor-text">
+          <img src="./assets/images/icon-search.svg" alt="" class="w-5 h-5 opacity-50 flex-shrink-0">
+          <input type="text" id="search-input" placeholder="Search for a place..."
+            class="bg-transparent text-neutral-0 placeholder-neutral-400 outline-none border-0 w-full text-sm"
+            aria-label="Search for a city" autocomplete="off">
+        </label>
+        <button id="search-button" type="button"
+          class="focus-button w-full sm:w-auto px-5 py-2.5 bg-blue-500 hover:bg-blue-700 rounded-lg transition-colors text-sm font-semibold text-center">
+          Search
+        </button>
+      </div>
+      <!-- No Results -->
+      <div id="no-results-state" class="hidden text-center mt-4">
+        <p class="text-neutral-300 text-sm">No search result found!</p>
+      </div>
+    </section>
+
+    <!-- Search In Progress Toast -->
+    <div id="search-in-progress" class="hidden flex items-center justify-center mb-4">
+      <div class="search-toast">
+        <div class="w-4 h-4 border-2 border-neutral-600 border-t-blue-500 rounded-full animate-spin"></div>
+        <span class="text-sm">Search in progress</span>
+      </div>
+    </div>
+
+    <!-- Empty State -->
+    <section id="empty-state" class="flex flex-col items-center justify-center py-16 text-center"
+      aria-labelledby="empty-state-heading">
+      <h2 id="empty-state-heading" class="font-display text-xl md:text-2xl font-bold mb-2">Discover the weather near you.</h2>
+      <p class="text-neutral-300 text-sm max-w-xs">Search for a city to get started.</p>
+    </section>
+
+    <!-- ===== MAIN GRID ===== -->
+    <div class="grid md:grid-cols-12 gap-6 md:gap-8 md:items-start">
+
+      <!-- ===== LEFT COLUMN ===== -->
+      <div class="md:col-span-7 space-y-6" id="left-column">
+        <!-- Weather Content -->
+        <main id="weather-content" class="hidden space-y-6">
+
+          <!-- Current Weather Hero -->
+          <section aria-label="Current Weather">
+            <div class="relative weather-hero-bg rounded-xl p-5 md:p-8 overflow-hidden min-h-[200px] md:min-h-[280px] flex items-center">
+              <div class="relative z-10 w-full flex flex-col md:flex-row md:items-center md:justify-between gap-4 overflow-hidden">
+                <div class="flex-1 min-w-0">
+                  <h2 id="location-name" class="font-display text-2xl md:text-3xl font-bold text-white truncate"></h2>
+                  <p id="current-date" class="text-neutral-400 text-sm mt-1 truncate"></p>
+                </div>
+                <div class="flex items-center gap-3 md:gap-5 flex-shrink-0">
+                  <img id="weather-icon" src="" alt="Weather icon" class="w-12 h-12 md:w-16 md:h-16 object-contain">
+                  <span id="current-temp" class="font-display text-5xl md:text-6xl font-bold text-white leading-none"></span>
+                </div>
+              </div>
+            </div>
+          </section>
+
+           <!-- Metrics Grid -->
+           <section aria-label="Weather Metrics">
+             <div class="grid grid-cols-2 md:grid-cols-4 gap-3">
+               <div class="bg-neutral-800 rounded-xl p-3 md:p-4 card-border">
+                 <p class="text-neutral-300 text-[11px] mb-1">Feels like</p>
+                 <p id="feels-like" class="font-sans text-lg md:text-xl font-normal">--</p>
+               </div>
+               <div class="bg-neutral-800 rounded-xl p-3 md:p-4 card-border">
+                 <p class="text-neutral-300 text-[11px] mb-1">Humidity</p>
+                 <p id="humidity" class="font-sans text-lg md:text-xl font-normal">--</p>
+               </div>
+               <div class="bg-neutral-800 rounded-xl p-3 md:p-4 card-border">
+                 <p class="text-neutral-300 text-[11px] mb-1">Wind</p>
+                 <p id="wind" class="font-sans text-lg md:text-xl font-normal">--</p>
+               </div>
+               <div class="bg-neutral-800 rounded-xl p-3 md:p-4 card-border">
+                 <p class="text-neutral-300 text-[11px] mb-1">Precipitation</p>
+                 <p id="precipitation" class="font-sans text-lg md:text-xl font-normal">--</p>
+               </div>
+             </div>
+           </section>
+
+           <!-- Daily Forecast -->
+           <section aria-label="Daily Forecast">
+             <h3 class="font-display text-base font-bold mb-3">Daily forecast</h3>
+             <div id="daily-forecast" class="grid grid-cols-3 md:grid-cols-7 gap-2 md:gap-3">
+             </div>
+           </section>
+
+        </main>
+      </div>
+
+      <!-- ===== RIGHT COLUMN ===== -->
+      <div class="md:col-span-4 md:sticky md:top-8">
+
+        <!-- Hourly Forecast -->
+        <section id="hourly-section" aria-label="Hourly Forecast" class="hidden">
+          <div class="bg-neutral-800 rounded-xl p-4 md:p-5 h-full flex flex-col" style="min-height: 500px;">
+            <div class="flex items-center justify-between mb-4 flex-shrink-0">
+              <h3 class="font-display text-base font-bold">Hourly forecast</h3>
+              <div class="relative" id="day-dropdown">
+                <button id="day-dropdown-toggle"
+                  class="focus-ring-blue flex items-center gap-1.5 bg-neutral-700 hover:bg-neutral-600 px-3 py-1.5 rounded-md text-xs transition-colors">
+                  <span id="selected-day-label" class="text-xs">Today</span>
+                  <img src="./assets/images/icon-dropdown.svg" alt="" class="w-3 h-3">
+                </button>
+                <div id="day-selector-dropdown"
+                  class="absolute right-0 mt-1 w-[150px] bg-neutral-800 rounded-lg shadow-lg border border-neutral-600/30 hidden z-10 py-1">
+                </div>
+              </div>
+            </div>
+            <div id="hourly-forecast" class="space-y-2 overflow-y-auto hourly-scroll flex-1">
+            </div>
+          </div>
+        </section>
+      </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="relative mt-8 md:mt-12 pt-6 border-t border-neutral-800 text-center">
+      <div class="attribution text-xs text-neutral-500">
+        Challenge by <a href="https://www.frontendmentor.io?ref=challenge"
+          class="text-neutral-400 hover:text-neutral-200 transition-colors">Frontend Mentor</a>.
+        Coded by <a href="https://www.frontendmentor.io/profile/AbdullarhyTech360" class="text-neutral-400 hover:text-neutral-200 transition-colors">Abdullahi Musa Kidandan</a>.
+      </div>
+    </footer>
+  </div>
+
+  <script src="./src/js/main.js"></script>
+</body>
+
+</html>
