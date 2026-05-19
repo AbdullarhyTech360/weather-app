@@ -197,7 +197,7 @@ function updateDailyForecast(daily) {
 
   daily.time.forEach((date, i) => {
     const el = document.createElement('div');
-    el.className = 'daily-card flex flex-col items-center justify-between bg-neutral-800 rounded-lg p-3 hover:bg-neutral-700 transition-colors cursor-pointer focus-ring-blue card-border';
+    el.className = 'daily-card flex flex-col justify-between bg-neutral-800 rounded-lg px-0 py-2 md:p-3 hover:bg-neutral-700 transition-colors cursor-pointer focus-ring-blue card-border';
     el.setAttribute('role', 'button');
     el.setAttribute('tabindex', '0');
 
@@ -212,8 +212,8 @@ function updateDailyForecast(daily) {
 
     el.innerHTML = `
       <span class="font-semibold text-xs text-center mb-2">${name}</span>
-      <img src="./assets/images/${icon}" alt="" class="w-6 h-6 mb-2">
-      <div class="daily-temp text-xs w-full flex flex-col lg:flex-row items-center lg:justify-between gap-0.5 lg:gap-1">
+      <img src="./assets/images/${icon}" alt="" class="w-10 h-10 md:w-8 md:h-8 mb-2">
+      <div class="daily-temp text-xs w-full flex flex-row items-center justify-between gap-0">
         <span class="font-bold">${high}${getTempUnit()}</span>
         <span class="text-neutral-400">${low}${getTempUnit()}</span>
       </div>

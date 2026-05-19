@@ -116,7 +116,7 @@
       </div>
     </div>
 
-    <h1 class="font-display text-[2rem] md:text-5xl lg:text-6xl font-bold text-center mx-auto mb-6 md:mb-8 leading-tight">
+    <h1 class="font-display text-[2.5rem] md:text-5xl lg:text-6xl font-bold text-center mx-auto mb-6 md:mb-8 leading-tight">
       How's the sky looking today?
     </h1>
 
@@ -124,14 +124,14 @@
     <section class="max-w-[450px] mx-auto mb-6 md:mb-8">
       <div class="flex flex-col sm:flex-row gap-3">
         <label for="search-input"
-          class="search-label relative flex-1 flex items-center gap-2 bg-neutral-800 px-3 py-2.5 rounded-lg border border-neutral-700/30 cursor-text">
+          class="search-label relative flex-1 flex items-center gap-2 bg-neutral-800 px-4 py-3 rounded-lg border border-neutral-700/30 cursor-text">
           <img src="./assets/images/icon-search.svg" alt="" class="w-5 h-5 opacity-50 flex-shrink-0">
           <input type="text" id="search-input" placeholder="Search for a place..."
-            class="bg-transparent text-neutral-0 placeholder-neutral-400 outline-none border-0 w-full text-sm"
+            class="bg-transparent text-neutral-0 placeholder-neutral-400 outline-none border-0 w-full text-base"
             aria-label="Search for a city" autocomplete="off">
         </label>
         <button id="search-button" type="button"
-          class="focus-button w-full sm:w-auto px-5 py-2.5 bg-blue-500 hover:bg-blue-700 rounded-lg transition-colors text-sm font-semibold text-center">
+          class="focus-button w-full sm:w-auto px-6 py-3 bg-blue-500 hover:bg-blue-700 rounded-lg transition-colors text-base font-semibold text-center">
           Search
         </button>
       </div>
@@ -167,14 +167,14 @@
           <!-- Current Weather Hero -->
           <section aria-label="Current Weather">
             <div class="relative weather-hero-bg rounded-xl p-5 md:p-8 overflow-hidden min-h-[200px] md:min-h-[280px] flex items-center">
-              <div class="relative z-10 w-full flex flex-col md:flex-row md:items-center md:justify-between gap-4 overflow-hidden">
+              <div class="relative z-10 w-full flex flex-col items-center text-center md:flex-row md:items-center md:justify-between gap-4 overflow-hidden">
                 <div class="flex-1 min-w-0">
                   <h2 id="location-name" class="font-display text-2xl md:text-3xl font-bold text-white truncate"></h2>
                   <p id="current-date" class="text-neutral-400 text-sm mt-1 truncate"></p>
                 </div>
                 <div class="flex items-center gap-3 md:gap-5 flex-shrink-0">
-                  <img id="weather-icon" src="" alt="Weather icon" class="w-12 h-12 md:w-16 md:h-16 object-contain">
-                  <span id="current-temp" class="font-display text-5xl md:text-6xl font-bold text-white leading-none"></span>
+                  <img id="weather-icon" src="" alt="Weather icon" class="w-16 h-16 md:w-16 md:h-16 object-contain">
+                  <span id="current-temp" class="font-display text-6xl md:text-6xl font-bold text-white leading-none"></span>
                 </div>
               </div>
             </div>
@@ -185,27 +185,27 @@
              <div class="grid grid-cols-2 md:grid-cols-4 gap-3">
                <div class="bg-neutral-800 rounded-xl p-3 md:p-4 card-border">
                  <p class="text-neutral-300 text-[11px] mb-1">Feels like</p>
-                 <p id="feels-like" class="font-sans text-lg md:text-xl font-normal">--</p>
-               </div>
-               <div class="bg-neutral-800 rounded-xl p-3 md:p-4 card-border">
-                 <p class="text-neutral-300 text-[11px] mb-1">Humidity</p>
-                 <p id="humidity" class="font-sans text-lg md:text-xl font-normal">--</p>
-               </div>
-               <div class="bg-neutral-800 rounded-xl p-3 md:p-4 card-border">
-                 <p class="text-neutral-300 text-[11px] mb-1">Wind</p>
-                 <p id="wind" class="font-sans text-lg md:text-xl font-normal">--</p>
-               </div>
-               <div class="bg-neutral-800 rounded-xl p-3 md:p-4 card-border">
-                 <p class="text-neutral-300 text-[11px] mb-1">Precipitation</p>
-                 <p id="precipitation" class="font-sans text-lg md:text-xl font-normal">--</p>
-               </div>
+                   <p id="feels-like" class="font-sans text-lg md:text-xl font-light md:font-normal text-neutral-100 md:text-neutral-0">--</p>
+                </div>
+                <div class="bg-neutral-800 rounded-xl p-3 md:p-4 card-border">
+                  <p class="text-neutral-300 text-[11px] mb-1">Humidity</p>
+                   <p id="humidity" class="font-sans text-lg md:text-xl font-light md:font-normal text-neutral-100 md:text-neutral-0">--</p>
+                </div>
+                <div class="bg-neutral-800 rounded-xl p-3 md:p-4 card-border">
+                  <p class="text-neutral-300 text-[11px] mb-1">Wind</p>
+                   <p id="wind" class="font-sans text-lg md:text-xl font-light md:font-normal text-neutral-100 md:text-neutral-0">--</p>
+                </div>
+                <div class="bg-neutral-800 rounded-xl p-3 md:p-4 card-border">
+                  <p class="text-neutral-300 text-[11px] mb-1">Precipitation</p>
+                   <p id="precipitation" class="font-sans text-lg md:text-xl font-light md:font-normal text-neutral-100 md:text-neutral-0">--</p>
+                </div>
              </div>
            </section>
 
            <!-- Daily Forecast -->
            <section aria-label="Daily Forecast">
              <h3 class="font-display text-base font-bold mb-3">Daily forecast</h3>
-             <div id="daily-forecast" class="grid grid-cols-3 md:grid-cols-7 gap-2 md:gap-3">
+               <div id="daily-forecast" class="grid grid-cols-3 md:grid-cols-7 gap-5 md:gap-3">
              </div>
            </section>
 
