@@ -212,8 +212,8 @@ function updateDailyForecast(daily) {
 
     el.innerHTML = `
       <span class="font-semibold text-xs text-center mb-2">${name}</span>
-      <img src="./assets/images/${icon}" alt="" class="w-10 h-10 md:w-8 md:h-8 mb-2">
-      <div class="daily-temp text-xs w-full flex flex-row items-center justify-between gap-0">
+      <img src="./assets/images/${icon}" alt="" class="w-12 h-12 md:w-10 md:h-10 mb-2">
+      <div class="daily-temp text-xs w-full flex flex-col md:flex-row items-center justify-between gap-0">
         <span class="font-bold">${high}${getTempUnit()}</span>
         <span class="text-neutral-400">${low}${getTempUnit()}</span>
       </div>
